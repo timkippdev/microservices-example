@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  proxy:
+    build:
+      context: ./proxy/.
+    ports:
+      - 8080:80
+    restart: always
+
+  frontend:
+    depends_on:
+      - proxy
+    build:
+      context: ./frontend/.
+    restart: always
+
+  backend:
+    depends_on:
+      - proxy
+    build:
+      context: ./backend/.
+    restart: always
